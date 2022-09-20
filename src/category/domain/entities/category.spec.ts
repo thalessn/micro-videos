@@ -17,6 +17,7 @@ describe("Category Unit Tests", () => {
       name: "Movie",
       description: "some description",
       is_active: false,
+      created_at,
     });
     expect(category.props).toStrictEqual({
       name: "Movie",
@@ -52,5 +53,57 @@ describe("Category Unit Tests", () => {
       name: "Movie",
       created_at,
     });
+  });
+
+  test("getter of name field", () => {
+    const category = new Category({ name: "Movie" });
+    expect(category.name).toBe("Movie");
+  });
+
+  test("getter and setter of description field", () => {
+    let category = new Category({
+      name: "Movie",
+    });
+    expect(category.description).toBeNull();
+
+    category = new Category({
+      name: "Movie",
+      description: "some description",
+    });
+    expect(category.description).toBe("some description");
+
+    category = new Category({ name: "Movie" });
+    category["description"] = "other description";
+    expect(category.description).toBe("other description");
+
+    category["description"] = undefined;
+    expect(category.description).toBeNull();
+  });
+
+  test("getter and setter of is_active props", () => {
+    let category = new Category({
+      name: "Movie",
+    });
+    expect(category.props.is_active).toBeTruthy();
+
+    category = new Category({ name: "Movie", is_active: true });
+    expect(category.props.is_active).toBeTruthy();
+
+    category = new Category({ name: "Movie", is_active: false });
+    expect(category.props.is_active).toBeFalsy();
+  });
+
+  test("getter of created_at props", () => {
+    let category = new Category({
+      name: "Movie",
+    });
+    expect(category.props.created_at).toBeInstanceOf(Date);
+
+    let created_at = new Date();
+    category = new Category({
+      name: "Movie",
+      created_at,
+    });
+    expect(category.props.created_at).toBe(created_at);
   });
 });

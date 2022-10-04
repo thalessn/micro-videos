@@ -7,7 +7,8 @@ RUN apt update && apt install -y --no-install-recommends \
   default-jre \
   zsh \
   curl \
-  wget
+  wget \
+  vim
 
 # Necessário para utilizar o sonarlint
 ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
